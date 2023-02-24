@@ -21,12 +21,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-    res.status(200).json({
-        message: 'Welcome to api semina',
-    });
-});
-
 app.use(v1, categoriesRouter);
 app.use(v1, talentsRouter);
 app.use(v1, imagesRouter);
@@ -34,3 +28,10 @@ app.use(v2, ordersRouter);
 app.use(v1, ticketsCategoriesRouter);
 
 module.exports = app;
+
+
+app.get('/', (req, res) => {
+    res.status(200).json({
+        message: 'Welcome to api semina',
+    });
+});
