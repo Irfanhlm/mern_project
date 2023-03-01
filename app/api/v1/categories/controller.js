@@ -1,11 +1,17 @@
 const Categories = require('./model');
-const { getAllCategories, createCategories } = require('../../../services/mongoose/categories');
+const {
+    getAllCategories,
+    createCategories,
+    getOneCategories,
+    updateCategories,
+    deleteCategories
+} = require('../../../services/mongoose/categories');
+const { StatusCodes } = require('http-status-codes');
 
 const create = async (req, res, next) => {
     try {
-        const { name } = req.body;
         const result = await createCategories(req);
-        res.status(201).json({
+        res.status(StatusCodes.CREATED).json({
             data: result,
         });
     } catch (err) {
@@ -15,8 +21,8 @@ const create = async (req, res, next) => {
 
 const index = async (req, res, next) => {
     try {
-        const result = await getAllCategories();
-        res.status(200).json({
+        const result = await getAllCategories(req);
+        res.status(StatusCodes.OK).json({
             data: result,
         });
     } catch (err) {
@@ -24,32 +30,10 @@ const index = async (req, res, next) => {
     }
 };
 
-// const find = async (req, res, next) => {
-//     try {
-//         const { id } = req.params;
-//         const result = await Categories.findById(id);
-//         if (!result) {
-//             return res.status(404).json({ message: 'Id tidak ditemukan' });
-//         }
-//         res.status(200).json({
-//             data: result
-//         });
-//     } catch (error) {
-//         next(error);
-//     }
-// };
-
 const find = async (req, res, next) => {
     try {
-        const { id } = req.params;
-
-        const result = await Categories.findOne(
-            { _id: id },
-        );
-        if (!result) {
-            return res.status(404).json({ message: 'Id categories tidak ditemukan' });
-        }
-        res.status(200).json({
+        const result = await getOneCategories(req);
+        res.status(StatusCodes.OK).json({
             data: result,
         });
     } catch (err) {
@@ -59,27 +43,8 @@ const find = async (req, res, next) => {
 
 const update = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        const { name } = req.body;
-
-        // const result = await Categories.findOneAndUpdate(
-        //     { _id: id },
-        //     { name }
-        // );
-        // if (!result) {
-        //     return res.status(404).json({ message: 'Id categories tidak ditemukan' });
-        // }
-
-        // result.name = name;
-        // result.save();
-
-        const result = await Categories.findOneAndUpdate(
-            { _id: id },
-            { name },
-            { new: true }
-        );
-
-        res.status(200).json({
+        const result = await updateCategories(req);
+        res.status(StatusCodes.OK).json({
             data: result,
         });
     } catch (error) {
@@ -89,9 +54,8 @@ const update = async (req, res, next) => {
 
 const remove = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        const result = await Categories.findByIdAndRemove(id);
-        res.status(200).json({
+        const result = await deleteCategories(req);
+        res.status(StatusCodes.OK).json({
             data: result
         });
     } catch (error) {
