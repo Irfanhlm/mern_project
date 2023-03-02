@@ -1,5 +1,5 @@
 const Categories = require('../../api/v1/categories/model');
-const { BadRequestError } = require('../../errors');
+const { BadRequestError, NotFoundError } = require('../../errors');
 
 const getAllCategories = async () => {
     const result = await Categories.find();

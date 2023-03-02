@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express();
+const { create } = require('./controller');
+const upload = require('../../../middlewares/mutler');
 
-router.post('/images', (req, res) => {
-    res.status(200).json({
-        message: 'Images Posted'
-    });
-});
+router.post('/images', upload.single('iniphoto'), create);
 
 module.exports = router;
