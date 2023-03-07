@@ -11,8 +11,11 @@ const getAllTalents = async (req) => {
     let condition = {};
 
     if (keyword) {
-        condition = { ...condition, name: keyword };
+        condition = { ...condition, name: { $regex: keyword, $options: 'i' } };
     }
+
+    console.log('condition');
+    console.log(condition);
 
     const result = await Talents.find(condition)
         .populate({
