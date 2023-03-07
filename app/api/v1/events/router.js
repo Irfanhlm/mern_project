@@ -1,35 +1,11 @@
 const express = require('express');
 const router = express();
+const { create, index, find, update, remove } = require('./controller');
 
-router.get('/talents', (req, res) => {
-    res.status(206).json({
-        message: 'Ini halaman talents'
-    });
-});
-
-router.post('/talents', (req, res) => {
-    res.status(207).json({
-        message: 'talents created'
-    });
-});
-
-router.get('/talents/:id', (req, res) => {
-    res.status(208).json({
-        message: 'success get talents by id'
-    });
-});
-
-router.put('/talents/:id', (req, res) => {
-    res.status(208).json({
-        message: 'success update talents by id'
-    });
-});
-
-router.delete('/talents/:id', (req, res) => {
-    res.status(208).json({
-        message: 'success get talents by id'
-    });
-});
-
+router.get('/events', index);
+router.get('/events/:id', find);
+router.put('/events/:id', update);
+router.delete('/events/:id', remove);
+router.post('/events', create);
 
 module.exports = router;

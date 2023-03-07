@@ -11,6 +11,7 @@ const talentsRouter = require('./app/api/v1/talents/router');
 const imagesRouter = require('./app/api/v1/images/router');
 const ordersRouter = require('./app/api/v1/orders/router');
 const ticketsCategoriesRouter = require('./app/api/v1/tickets_categories/router');
+const eventsRouter = require('./app/api/v1/events/router');
 
 const notFoundMiddleware = require('./app/middlewares/not-found');
 const handleErrorMiddleware = require('./app/middlewares/handler-eror');
@@ -31,8 +32,9 @@ app.get('/', (req, res) => {
 });
 
 app.use(v1, categoriesRouter);
-app.use(v1, talentsRouter);
 app.use(v1, imagesRouter);
+app.use(v1, talentsRouter);
+app.use(v1, eventsRouter);
 app.use(v2, ordersRouter);
 app.use(v1, ticketsCategoriesRouter);
 
