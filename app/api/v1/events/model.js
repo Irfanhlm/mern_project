@@ -58,11 +58,6 @@ const EventSchema = new mongoose.Schema(
             type: [ticketCategoriesSchema],
             required: true,
         },
-        image: {
-            type: mongoose.Types.ObjectId,
-            ref: 'Image',
-            required: true,
-        },
         category: {
             type: mongoose.Types.ObjectId,
             ref: 'Category',
@@ -71,6 +66,11 @@ const EventSchema = new mongoose.Schema(
         talent: {
             type: mongoose.Types.ObjectId,
             ref: 'Talent',
+            required: true,
+        },
+        image: {
+            type: mongoose.Types.ObjectId,
+            ref: 'Image',
             required: true,
         },
     },

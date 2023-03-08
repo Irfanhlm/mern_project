@@ -24,7 +24,10 @@ const getAllEvents = async (req) => {
     }
 
     const result = await Events.find(condition)
-        .populate({ path: 'image', select: '_id name' })
+        .populate({
+            path: 'image',
+            select: '_id name'
+        })
         .populate({
             path: 'category',
             select: '_id name',
@@ -62,7 +65,7 @@ const createEvents = async (req) => {
     const check = await Events.findOne({ title });
 
     // apa bila check true / data Events sudah ada maka kita tampilkan error bad request dengan message pembicara duplikat
-    if (check) throw new BadRequestError('judul event duplikat');
+    if (check) throw new BadRequestError('judul acara sudah terdaftar');
 
     const result = await Events.create({
         title,
@@ -85,7 +88,10 @@ const getOneEvents = async (req) => {
     const { id } = req.params;
 
     const result = await Events.findOne({ _id: id })
-        .populate({ path: 'image', select: '_id name' })
+        .populate({
+            path: 'image',
+            select: '_id name'
+        })
         .populate({
             path: 'category',
             select: '_id name',

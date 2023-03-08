@@ -1,7 +1,18 @@
 // import services images
-const { createImages } = require('../../../services/mongoose/images');
+const { createImages, getAllImage } = require('../../../services/mongoose/images');
 
 const { StatusCodes } = require('http-status-codes');
+
+const index = async (req, res) => {
+    try {
+        const result = await getAllImage(req);
+        res.status(StatusCodes.OK).json({
+            data: result
+        });
+    } catch (err) {
+        next(err);
+    }
+};
 
 const create = async (req, res) => {
     try {
@@ -18,4 +29,4 @@ const create = async (req, res) => {
     }
 };
 
-module.exports = { create };
+module.exports = { create, index };

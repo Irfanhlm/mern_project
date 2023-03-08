@@ -35,8 +35,8 @@ app.use(v1, categoriesRouter);
 app.use(v1, imagesRouter);
 app.use(v1, talentsRouter);
 app.use(v1, eventsRouter);
-app.use(v2, ordersRouter);
 app.use(v1, ticketsCategoriesRouter);
+app.use(v2, ordersRouter);
 
 app.use(notFoundMiddleware);
 app.use(handleErrorMiddleware);

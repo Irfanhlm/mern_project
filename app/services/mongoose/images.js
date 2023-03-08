@@ -17,6 +17,12 @@ const createImages = async (req) => {
     return result;
 };
 
+const getAllImage = async () => {
+    const result = await Images.find();
+
+    return result;
+};
+
 // tambahkan function checking Image 
 const checkingImage = async (id) => {
     const result = await Images.findOne({ _id: id });
@@ -27,4 +33,4 @@ const checkingImage = async (id) => {
     return result;
 };
 
-module.exports = { createImages, generateUrlImage, checkingImage };
+module.exports = { createImages, getAllImage, generateUrlImage, checkingImage };
